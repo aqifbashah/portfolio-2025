@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./context/theme-provider";
+import ThemeToggle from "./components/ThemeToggle";
+import NavBar from "./components/NavBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +30,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>
+          <header className="flex items-center justify-center bg-gray-300 p-4 text-black dark:bg-gray-700 dark:text-white">
+            <h1>Aqif Bashah</h1>
+          </header>
+
+          {/* Hide navigation on home page */}
+          <NavBar />
+
+          <ThemeToggle />
+          <main className="p-4">{children}</main>
+          <footer className="mt-4 bg-gray-200 p-4 text-black dark:bg-gray-800 dark:text-white">
+            © 2025 My Portfolio
+          </footer>
+        </ThemeProvider>
       </body>
     </html>
   );
