@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link } from "react-scroll";
 
 export default function NavBar() {
   const [isMounted, setIsMounted] = useState(false);
@@ -15,11 +15,21 @@ export default function NavBar() {
 
   return (
     <nav className="flex items-center justify-center gap-4 bg-gray-200 p-2 text-black dark:bg-gray-800 dark:text-white">
-      <Link href="/">Home</Link>
-      <Link href="/about">About</Link>
-      <Link href="/projects">Projects</Link>
-      <Link href="/resume">Resume</Link>
-      <Link href="/contact">Contact</Link>
+      <Link to="hero" smooth={true} duration={500}>
+        Home
+      </Link>
+      <Link to="about" smooth={true} duration={500}>
+        About
+      </Link>
+      <Link to="experience" smooth={true} duration={500}>
+        Experience
+      </Link>
+      <Link to="projects" smooth={true} duration={500}>
+        Projects
+      </Link>
+      <Link to="contact" smooth={true} duration={500}>
+        Contact
+      </Link>
     </nav>
   );
 }

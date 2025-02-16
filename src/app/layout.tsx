@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <header className="flex items-center justify-between bg-gray-300 px-20 py-4 text-black dark:bg-gray-700 dark:text-white">
+          <header className="fixed top-0 flex w-full items-center justify-between bg-gray-300 px-20 py-4 text-black dark:bg-gray-700 dark:text-white">
             <h1>Aqif Bashah</h1>
             <NavBar />
             <ThemeToggle />
