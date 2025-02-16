@@ -31,15 +31,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <header className="flex items-center justify-center bg-gray-300 p-4 text-black dark:bg-gray-700 dark:text-white">
+          <header className="flex items-center justify-between bg-gray-300 px-20 py-4 text-black dark:bg-gray-700 dark:text-white">
             <h1>Aqif Bashah</h1>
+            <NavBar />
+            <ThemeToggle />
           </header>
-
-          {/* Hide navigation on home page */}
-          <NavBar />
-
-          <ThemeToggle />
-          <main className="p-4">{children}</main>
+          <main className="px-20">{children}</main>
           <footer className="mt-4 bg-gray-200 p-4 text-black dark:bg-gray-800 dark:text-white">
             © 2025 My Portfolio
           </footer>

@@ -14,11 +14,22 @@ export default function ThemeToggle() {
   if (!isMounted) return null;
 
   return (
-    <button
-      onClick={toggleTheme}
-      className="rounded bg-gray-300 p-2 text-black dark:bg-gray-700 dark:text-white"
-    >
-      {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-    </button>
+    <label className="flex cursor-pointer items-center">
+      <input
+        type="checkbox"
+        checked={theme === "dark"}
+        onChange={toggleTheme}
+        className="hidden"
+      />
+      <div className="relative h-8 w-14 rounded-full bg-gray-200 transition-colors dark:bg-gray-600">
+        <div
+          className={`absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md transition-all dark:bg-gray-800 ${
+            theme === "dark" ? "translate-x-6" : "translate-x-0"
+          }`}
+        >
+          {theme === "light" ? "☀️" : "🌙"}
+        </div>
+      </div>
+    </label>
   );
 }
