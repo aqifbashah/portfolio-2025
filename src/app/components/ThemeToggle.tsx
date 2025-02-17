@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTheme } from "../context/theme-provider";
+import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
 
 export default function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function ThemeToggle() {
       <input
         type="checkbox"
         checked={theme === "dark"}
-        onChange={toggleTheme}
+        onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
         className="hidden"
       />
       <div className="relative h-8 w-14 rounded-full bg-gray-200 transition-colors dark:bg-gray-600">
@@ -27,7 +28,11 @@ export default function ThemeToggle() {
             theme === "dark" ? "translate-x-6" : "translate-x-0"
           }`}
         >
-          {theme === "light" ? "☀️" : "🌙"}
+          {theme === "light" ? (
+            <Sun className="h-4 w-4" />
+          ) : (
+            <Moon className="h-4 w-4" />
+          )}
         </div>
       </div>
     </label>

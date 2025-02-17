@@ -1,35 +1,63 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "react-scroll";
+import { useLenis } from "../hooks/useLenis";
+
+const navLinks = [
+  { to: "hero", label: "Home" },
+  { to: "about", label: "About" },
+  { to: "experience", label: "Experience" },
+  { to: "projects", label: "Projects" },
+  { to: "contact", label: "Contact" },
+];
 
 export default function NavBar() {
-  const [isMounted, setIsMounted] = useState(false);
+  const lenisRef = useLenis(); // Lenis hook for smooth scrolling
+  const [activeLink, setActiveLink] = useState<string>("");
 
-  // Ensure component only renders on client
   useEffect(() => {
-    setIsMounted(true);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveLink(entry.target.id); // Set active link when section is in view
+          }
+        });
+      },
+      { threshold: 0.5 }, // Trigger when 50% of the section is visible
+    );
+
+    // Observe each section
+    navLinks.forEach(({ to }) => {
+      const section = document.getElementById(to);
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      observer.disconnect(); // Cleanup observer when component unmounts
+    };
   }, []);
 
-  if (!isMounted) return null; // Avoid mismatched SSR/CSR
+  const handleScrollTo = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      lenisRef.current?.scrollTo(element); // Scroll to section with Lenis
+    }
+  };
 
   return (
     <nav className="flex items-center justify-center gap-4 bg-gray-200 p-2 text-black dark:bg-gray-800 dark:text-white">
-      <Link to="hero" smooth={true} duration={500}>
-        Home
-      </Link>
-      <Link to="about" smooth={true} duration={500}>
-        About
-      </Link>
-      <Link to="experience" smooth={true} duration={500}>
-        Experience
-      </Link>
-      <Link to="projects" smooth={true} duration={500}>
-        Projects
-      </Link>
-      <Link to="contact" smooth={true} duration={500}>
-        Contact
-      </Link>
+      {navLinks.map(({ to, label }) => (
+        <button
+          key={to}
+          onClick={() => handleScrollTo(to)} // Handle scroll on click
+          className={`cursor-pointer text-gray-600 transition-all ${
+            activeLink === to ? "font-bold text-blue-600" : ""
+          }`}
+        >
+          {label}
+        </button>
+      ))}
     </nav>
   );
 }

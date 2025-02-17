@@ -1,43 +1,21 @@
-'use client'
+"use client";
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import * as React from "react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-type Theme = 'light' | 'dark'
-type ThemeContextType = {
-  theme: Theme
-  toggleTheme: () => void
-}
+export function ThemeProvider({
+  children,
+  ...props
+}: React.ComponentProps<typeof NextThemesProvider>) {
+  const [mounted, setMounted] = React.useState(false);
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      return (localStorage.getItem('theme') as Theme) || 'light'
-    }
-    return 'light'
-  })
+  if (!mounted) {
+    return <>{children}</>; // Prevent rendering mismatched server HTML
+  }
 
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark') // Apply dark mode
-    } else {
-      document.documentElement.classList.remove('dark') // Remove dark mode
-    }
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
-  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light')
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  )
-}
-
-export function useTheme() {
-  const context = useContext(ThemeContext)
-  if (!context) throw new Error('useTheme must be used within a ThemeProvider')
-  return context
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
