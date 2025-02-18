@@ -46,13 +46,13 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="flex items-center justify-center gap-4 bg-gray-200 p-2 text-black dark:bg-gray-800 dark:text-white">
+    <nav className="flex items-center justify-center gap-4 p-2 text-black dark:text-white">
       {navLinks.map(({ to, label }) => (
         <button
           key={to}
           onClick={() => handleScrollTo(to)} // Handle scroll on click
-          className={`cursor-pointer text-gray-600 transition-all ${
-            activeLink === to ? "font-bold text-blue-600" : ""
+          className={`cursor-pointer transition-all ${
+            activeLink === to ? "font-bold text-primary" : "text-gray1"
           }`}
         >
           {label}

@@ -15,7 +15,7 @@ export default function Home() {
   if (!isMounted) return null;
 
   return (
-    <div className="flex flex-col gap-4 bg-white px-20 transition-all dark:bg-gray-900">
+    <div className="flex flex-col gap-4 bg-background px-20 transition-all">
       <section id="hero">
         <Hero />
       </section>

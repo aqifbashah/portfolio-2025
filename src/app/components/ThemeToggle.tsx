@@ -22,9 +22,9 @@ export default function ThemeToggle() {
         onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
         className="hidden"
       />
-      <div className="relative h-8 w-14 rounded-full bg-gray-200 transition-colors dark:bg-gray-600">
+      <div className="relative h-8 w-14 rounded-full bg-primary transition-colors">
         <div
-          className={`absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-white shadow-md transition-all dark:bg-gray-800 ${
+          className={`absolute left-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-secondary shadow-md transition-all ${
             theme === "dark" ? "translate-x-6" : "translate-x-0"
           }`}
         >
