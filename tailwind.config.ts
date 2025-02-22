@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        saira: ["Saira", "sans-serif"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
@@ -17,6 +20,5 @@ export default {
       },
     },
   },
-  darkMode: "class",
   plugins: [],
 } satisfies Config;

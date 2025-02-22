@@ -46,7 +46,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="flex items-center justify-center gap-4 p-2 text-black dark:text-white">
+    <nav className="flex items-center justify-center gap-16 p-2 text-2xl">
       {navLinks.map(({ to, label }) => (
         <button
           key={to}

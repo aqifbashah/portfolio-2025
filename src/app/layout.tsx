@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Saira } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./context/theme-provider";
 import Header from "./components/Header";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Aqif Bashah Port",
@@ -26,9 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`font-saira antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Header />
           <main>{children}</main>
